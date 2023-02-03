@@ -13,14 +13,13 @@ export default {};
 
 <style>
 .progress {
-  width: 500px;
+  width: 100%;
   height: 10px;
   border-radius: 50px;
   background-color: #d1d5db;
 }
 
 .progress-bar {
-  width: 500px;
   height: 10px;
   border-radius: 50px;
   background-color: #e52729;

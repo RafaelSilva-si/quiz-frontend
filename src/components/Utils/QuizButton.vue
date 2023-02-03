@@ -1,5 +1,5 @@
 <template>
-  <button class="button" type="button">Avançar</button>
+  <button class="button">Avançar</button>
 </template>
 
 <script></script>
@@ -12,5 +12,11 @@
   color: #fff;
   height: 50px;
   width: 90px;
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 100%;
+  }
 }
 </style>

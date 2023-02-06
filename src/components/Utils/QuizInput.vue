@@ -1,16 +1,14 @@
 <template>
   <label class="container"
     >{{ placeholder }}
-    <input type="radio" name="awanser" />
+    <input type="radio" name="aswnser" :value="value" :checked="checked" />
     <span class="checkmark"></span>
   </label>
 </template>
 
 <script>
 export default {
-  props: {
-    placeholder: { type: String, required: true },
-  },
+  props: ["placeholder", "value", "checked"],
 };
 </script>
 

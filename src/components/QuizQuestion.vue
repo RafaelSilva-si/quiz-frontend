@@ -11,7 +11,10 @@
           :checked="question.aswnser == answers"
         />
       </div>
-      <a @click="this.$emit('back')" class="btn_back" v-if="current >= 1"
+      <a
+        @click="this.$emit('back')"
+        class="btn_back"
+        v-if="current <= 18 && current > 0"
         >Voltar</a
       >
       <QuizButton :title="'Avançar'" v-if="current <= 18" />

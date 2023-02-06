@@ -1,6 +1,6 @@
 <template>
   <div id="quiz">
-    <div v-if="question <= questions.length - 1">
+    <div v-if="questions.length > 0 && question <= questions.length - 1">
       <QuizTitle :text="'Questionário'" />
       <QuizProgress :progress="progress" :question="question" />
       <QuizTitle :text="`Pergunta ${question + 1}`" />
@@ -14,12 +14,19 @@
           />
         </aside>
       </div>
+      <a @click="back" class="btn_back" v-if="question > 18">Voltar</a>
       <QuizButton :title="'Finalizar'" v-if="question > 18" @click="submit" />
     </div>
-    <div v-else class="feedback">
+    <div v-else-if="questions.length > 0" class="feedback">
       <h1>Seu Resultado foi</h1>
       <h2>{{ hits }}%</h2>
       <QuizButton :title="'Reiniciar'" @click="finish" />
+    </div>
+    <div v-if="questions.length <= 0" class="feedback">
+      <h1>
+        Erro ao carregar quiz, verifique se a api está rodando na porta 3000
+      </h1>
+      <QuizButton :title="'Recarregar'" @click="finish" />
     </div>
   </div>
 </template>
@@ -51,7 +58,7 @@ export default defineComponent({
     };
   },
   computed: {
-    progress() {
+    progress(): number {
       const total = this.questions.length;
       return Math.round((this.question / total) * 100) || 0;
     },
@@ -68,16 +75,19 @@ export default defineComponent({
       .then((response) => (this.questions = response.data));
   },
   methods: {
-    next(e: any) {
+    next(e: {
+      preventDefault: () => void;
+      target: { aswnser: { value: string | undefined } };
+    }) {
       e.preventDefault();
       this.questions[this.question].aswnser = e.target.aswnser.value;
       this.question < 20 && this.question++;
     },
     submit() {
-      const aswnser =
-        this.questions.filter((i) => i.aswnser == i.correct_answer).length + 1;
+      const aswnser = this.questions.filter(
+        (i) => i.aswnser == i.correct_answer
+      ).length;
       this.question++;
-      console.log(aswnser);
       this.hits = Math.round((aswnser / this.questions.length) * 100) || 0;
     },
     finish() {

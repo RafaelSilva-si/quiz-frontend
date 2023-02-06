@@ -1,14 +1,16 @@
 <template>
   <div class="progress-container">
     <div class="progress">
-      <div class="progress-bar" :style="{ width: 30 + '%' }"></div>
+      <div class="progress-bar" :style="{ width: progress + 1 + '%' }"></div>
     </div>
-    <p class="questionIndicator">Pergunta 1 de 20</p>
+    <p class="questionIndicator">Pergunta {{ question + 1 }} de 20</p>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["progress", "question"],
+};
 </script>
 
 <style>

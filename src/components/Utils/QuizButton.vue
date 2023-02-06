@@ -1,8 +1,12 @@
 <template>
-  <button class="button">Avançar</button>
+  <button class="button">{{ title }}</button>
 </template>
 
-<script></script>
+<script>
+export default {
+  props: ["title"],
+};
+</script>
 
 <style>
 .button {
@@ -12,6 +16,7 @@
   color: #fff;
   height: 50px;
   width: 90px;
+  margin: 10px;
 }
 
 @media (max-width: 600px) {
